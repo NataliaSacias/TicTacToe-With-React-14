@@ -69,16 +69,7 @@ export function Home() {
 							</div>
 						);
 					})}
-					{/* <div className="cell" onClick={() => {}}></div>
-					<div className="cell" onClick={() => {}}></div>
-					<div className="cell" onClick={() => {}}></div>
-					<div className="cell" onClick={() => {}}></div>
-					<div className="cell" onClick={() => {}}></div>
-					<div className="cell" onClick={() => {}}></div>
-					<div className="cell" onClick={() => {}}></div>
-					<div className="cell" onClick={() => {}}></div>
-					<div className="cell" onClick={() => {}}></div>
-					<div className="cell" onClick={() => {}}></div> */}
+					
 				</div>
 				<h2 className="game--status"></h2>
 				<button

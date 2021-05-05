@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 // import Celda from "./celda.js";
 import "./celda.css";
 
@@ -7,41 +7,37 @@ import rigoImage from "../../img/rigo-baby.jpg";
 
 //create your first component
 export function Home() {
-	const [game, setGame] = useState([
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" ",
-		" "
-	]);
+	const [game, setGame] = useState(["", "", "", "", "", "", "", "", ""]);
 
-	const [turnoActual, setTurnoActual] = useState("X");
+	const [turnoActual, setTurnoActual] = useState("");
+
+	const [winner, setWinner] = useState("");
+
+	useEffect(() => {
+		calculateWinner(game);
+	}, [game]);
 
 	const marcar = index => {
 		let newGame = game.map((e, i) => {
 			return index === i ? turnoActual : e;
 		});
+		setGame(newGame);
+		cambiarTurno();
+	};
 
+	const cambiarTurno = () => {
 		if (turnoActual === "X") {
 			setTurnoActual("O");
 		} else {
 			setTurnoActual("X");
 		}
-
-		setGame(newGame);
-		let win = calculateWinner(game);
-		setWinner(win);
+		return turnoActual;
 	};
 
-	const [winner, setWinner] = useState("");
 	// funcion de reset
 
 	const restart = () => {
-		setGame([" ", " ", " ", " ", " ", " ", " ", " ", " "]);
+		setGame(["", "", "", "", "", "", "", "", ""]);
 	};
 
 	// funcion para evaluar si hay ganadores
@@ -64,7 +60,8 @@ export function Home() {
 				squares[a] === squares[b] &&
 				squares[a] === squares[c]
 			) {
-				return squares[a];
+				alert("Ganaste", game[a]);
+				restart();
 			}
 		}
 		return null;
@@ -73,8 +70,25 @@ export function Home() {
 	return (
 		<div className="text-center mt-5">
 			<section>
+				<input type="text" />
+				<input></input>
+				<button
+					onClick={() => {
+						setTurnoActual("O");
+					}}>
+					O
+				</button>
+				<button
+					onClick={() => {
+						setTurnoActual("X");
+					}}>
+					X
+				</button>
+			</section>
+
+			<section>
 				<h1 className="game--title">Tic Tac Toe</h1>
-				<h3 className="game--title">GANÓ {winner}</h3>
+				{/* <h3 className="game--title">GANÓ {winner}</h3> */}
 
 				<div className="game--container">
 					{game.map((elemento, index) => {
@@ -83,7 +97,7 @@ export function Home() {
 								key={index}
 								className="cell"
 								onClick={() => {
-									if (game[index] == " ") {
+									if (game[index] == "") {
 										marcar(index);
 									}
 								}}>

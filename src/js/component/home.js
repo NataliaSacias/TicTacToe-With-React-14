@@ -33,12 +33,11 @@ export function Home() {
 		}
 
 		setGame(newGame);
-        let win = calculateWinner(game)
-        setWinner(win)
+		let win = calculateWinner(game);
+		setWinner(win);
 	};
 
-    
-    const [winner, setWinner] = useState("")
+	const [winner, setWinner] = useState("");
 	// funcion de reset
 
 	const restart = () => {
@@ -46,15 +45,6 @@ export function Home() {
 	};
 
 	// funcion para evaluar si hay ganadores
-	// const winner = () => {
-	/*
-        0,1,2 - 3,4,5 - 6,7,8
-        0,3,6 - 1,4,7  - 2,5,8
-        0,4,8 - 2,4,6
-        cuadno llame a la funcion win q sea dentro de useEffect
-        */
-
-	// };
 
 	function calculateWinner(squares) {
 		const lines = [
@@ -84,8 +74,10 @@ export function Home() {
 		<div className="text-center mt-5">
 			<section>
 				<h1 className="game--title">Tic Tac Toe</h1>
-				<h1 className="game--title">Tic Tac Toe</h1>
-    <h1 className="game--title">El ganador es: {winner}1><h1                					{game.map((elemento, index) => {
+				<h3 className="game--title">GANÓ {winner}</h3>
+
+				<div className="game--container">
+					{game.map((elemento, index) => {
 						return (
 							<div
 								key={index}
@@ -100,7 +92,6 @@ export function Home() {
 						);
 					})}
 				</div>
-				<h2 className="game--status"></h2>
 				<button
 					className="game--restart"
 					onClick={() => {
